@@ -22,7 +22,7 @@ body{margin:0;background:var(--bg);color:var(--fg);font:400 1.0625rem/1.7 "DM Sa
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:10}
 h1,h2,h3{font-family:"Newsreader",Georgia,serif;font-weight:400;line-height:1.12;margin:0 0 .55em;letter-spacing:-.01em}
 h2{font-size:clamp(1.8rem,4vw,2.6rem)}h3{font-size:1.35rem;font-weight:600}
-p{margin:0 0 1em;max-width:64ch}a{color:var(--acc)}
+p{margin:0 0 1em;max-width:64ch;text-align:justify;text-align-last:left;-webkit-hyphens:auto;hyphens:auto}a{color:var(--acc)}
 a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
 .bar{background:var(--gold);color:#14213d;font-size:.95rem;text-align:center;padding:.55rem 2.5rem;position:relative;font-weight:500}
 .bar a{color:#14213d}.bar button{position:absolute;right:.6rem;top:50%;transform:translateY(-50%);background:none;border:0;color:#14213d;font-size:1.3rem;cursor:pointer}
@@ -129,10 +129,36 @@ select{font:inherit;padding:.7rem .8rem;border:1px solid var(--line);border-radi
 #ship select,#ship input{width:100%;max-width:100%}#ship label{min-width:0}
 #privnote{margin-top:.9rem}
 footer a{display:inline-block;margin:.2rem .6rem}
+.xmas{position:relative;overflow:hidden;background:linear-gradient(135deg,#0a2318,#14213d 65%,#3d1f12 130%);color:#fdf6e9;padding:1.15rem 1rem;text-align:center;font-size:1.05rem;border-bottom:2px solid var(--gold);box-shadow:0 2px 18px rgba(0,0,0,.25)}
+.xmas::before{content:"";position:absolute;left:0;right:0;top:0;height:3px;background:repeating-linear-gradient(90deg,var(--gold) 0 14px,#b23b3b 14px 28px,#0d2a1f 28px 42px)}
+.xmas b{color:var(--gold);font-family:"Newsreader",Georgia,serif;font-size:1.15rem;font-weight:600;letter-spacing:.01em}
+.xmas .flakes{position:absolute;inset:0;pointer-events:none;opacity:.7}
+.xmas .flakes span{position:absolute;top:-10px;width:7px;height:7px;border-radius:50%;background:#fdf6e9;box-shadow:0 0 6px rgba(253,246,233,.9);animation:xf linear infinite}
+@keyframes xf{to{transform:translateY(160px)}}
+.xmas .in2{position:relative;z-index:1;display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;justify-content:center}
+.xmas .ic{animation:xspin 3.2s ease-in-out infinite}
+@keyframes xspin{0%,100%{transform:rotate(-8deg)}50%{transform:rotate(8deg)}}
+.xmas a{color:var(--gold);text-decoration:underline;font-weight:600}
+.xmas button{background:rgba(253,246,233,.08);border:1px solid rgba(253,246,233,.45);color:#fdf6e9;border-radius:50%;width:24px;height:24px;line-height:1;cursor:pointer;font-size:.95rem;margin-left:.5rem;flex:none}
+.gift-wrap{position:relative;overflow:hidden;background:linear-gradient(160deg,#0a2318,#14213d 60%,#3d1f12 150%);border:1px solid #2a4a38;border-radius:18px;padding:2rem 1.8rem;margin:0 0 2.2rem;color:#fdf6e9;box-shadow:0 14px 34px rgba(10,30,20,.28)}
+.gift-wrap::before{content:"";position:absolute;left:0;right:0;top:0;height:5px;background:repeating-linear-gradient(90deg,var(--gold) 0 18px,#b23b3b 18px 36px)}
+.gift-wrap::after{content:"❅";position:absolute;right:1.4rem;top:1.6rem;font-size:2.6rem;color:rgba(232,163,23,.18);transform:rotate(12deg)}
+.gift-wrap h3{display:flex;align-items:center;gap:.6rem;margin-bottom:.35rem;font-size:1.55rem;color:var(--gold)}
+.gift-wrap h3 svg{flex:none;animation:xspin 3.2s ease-in-out infinite}
+.gift-wrap>p.lede{color:#e9e2d2;position:relative;z-index:1}
+.gift-wrap>p.lede b{color:var(--gold)}
+.gift-grid{position:relative;z-index:1;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1.2rem;margin-top:1.3rem}
+.gift-grid .g{background:#fdf6e9;border:1px solid rgba(232,163,23,.4);border-radius:12px;padding:1rem .9rem 1.1rem;text-align:center;position:relative;transition:transform .2s ease;box-shadow:0 8px 20px rgba(0,0,0,.18)}
+.gift-grid .g:hover{transform:translateY(-4px)}
+.gift-grid img{width:100%;max-width:120px;border-radius:6px;box-shadow:0 6px 16px rgba(20,33,61,.25);margin-bottom:.6rem}
+.gift-tag{position:absolute;top:-.55rem;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#b23b3b,#8a2c2c);color:#fff;font-size:.68rem;font-weight:700;padding:.25rem .7rem;border-radius:20px;letter-spacing:.03em;box-shadow:0 3px 8px rgba(0,0,0,.3);white-space:nowrap}
+.gift-grid p{font-size:.92rem;margin:.2rem 0 0;color:#14213d;font-weight:600}
+@media (prefers-reduced-motion:reduce){.xmas .flakes span{animation:none}}
 </style>
 </head>
 <body>
 <div class="bar" id="bar">The Magic Music Box is released on 27 November. <a href="https://www.europebookstore.com/products/the-magic-music-box-stefania-bellini/" target="_blank" rel="noopener">Get your copy</a><button aria-label="Dismiss announcement" onclick="document.getElementById('bar').remove()">×</button></div>
+<div class="xmas" id="xmasbar"><div class="flakes" aria-hidden="true"></div><div class="in2"><svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#e8a317" stroke-width="1.6"><path d="M12 2v20M2 12h20M12 2l3 3M12 2l-3 3M12 22l3-3M12 22l-3-3M2 12l3-3M2 12l3 3M22 12l-3-3M22 12l-3 3"/></svg><span>🎄 <b>Gift ideas for Christmas</b> — signed copies, wrapped and ready. <a href="#shop">See gift bundles →</a></span><button aria-label="Dismiss" onclick="document.getElementById('xmasbar').remove()">×</button></div></div>
 <header><div class="nav"><a class="brand" href="#home">Stefania Bellini</a>
 <nav aria-label="Main"><a href="#home">Home</a><a href="#about">About</a><a href="#books">Books</a><a href="#shop">Shop</a><a href="#news">News</a><a href="#press">Press</a><a href="#gallery">Gallery</a><a href="#projects">Projects</a><a href="#contact">Contact</a></nav></div></header>
 <main>
@@ -144,7 +170,7 @@ footer a{display:inline-block;margin:.2rem .6rem}
 <p class="lede">She writes fantasy stories for young readers and the families who read with them. Her pages are full of music boxes that open secret worlds and little bears who follow lights through enchanted woods.</p>
 <a class="btn" href="#books">Meet the books</a><a class="btn ghost" href="#shop">Order a signed copy</a></div>
 <div class="mock"><div class="panel"><img class="on" data-k="mmb" src="the-magic-music-box-book-and-tablet-mockup.webp" alt="The Magic Music Box, book and tablet mockup"><img data-k="car" src="il-carillon-magico-book-and-tablet-mockup.webp" alt="Il Carillon Magico, book and tablet mockup"><img data-k="luc" src="le-luci-nel-bosco-magico-book-and-tablet-mockup.webp" alt="Le luci nel bosco magico, book and tablet mockup"></div><div class="dots"><button aria-label="Show The Magic Music Box" aria-current="true"></button><button aria-label="Show Il Carillon Magico" aria-current="false"></button><button aria-label="Show Le luci nel bosco magico" aria-current="false"></button></div></div></div></div>
-<img class="banner" src="il-carillon-magico-and-le-luci-nel-bosco-magico-the-two-book.jpg" alt="Il Carillon Magico and Le luci nel bosco magico, the two books by Stefania Bellini">
+<img class="banner" src="the-three-books-together-illustrated-banner.jpg" alt="The Magic Music Box, Il Carillon Magico and Le luci nel bosco magico, the three books by Stefania Bellini, with a fantasy-themed illustration" loading="lazy" decoding="async">
 
 <div class="band"><div class="intro"><img class="ph" src="portrait-of-stefania-bellini.jpg" alt="Portrait of Stefania Bellini" loading="lazy" decoding="async"><div><h2>A storyteller with a classicist’s eye</h2><p>Stefania Bellini studied Philosophy and the Classics, and she is now continuing her studies in Archaeology. That love of ancient worlds and careful thinking runs through her stories, which blend wonder, adventure and a quiet look inside the heart.</p><p>She is the founder of BiblioBay, an independent publishing house for children, and the author of two fantasy books available on Amazon.</p><a class="btn ghost" href="#about">Read her story</a></div></div></div>
 
@@ -200,6 +226,13 @@ footer a{display:inline-block;margin:.2rem .6rem}
 <section id="shop" class="page shop" hidden>
 <h2>Shop and pricing</h2>
 <p class="lede">Signed copies for readers, schools and libraries. You pay securely with PayPal once your total is confirmed.</p>
+<div class="gift-wrap"><h3><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#e8a317" stroke-width="1.6"><path d="M12 2v20M2 12h20M12 2l3 3M12 2l-3 3M12 22l3-3M12 22l-3 3M2 12l3-3M2 12l3 3M22 12l-3-3M22 12l-3 3"/></svg>🎁 Gift ideas for Christmas</h3><p class="lede" style="margin-bottom:0">Signed by the author, ready to wrap, and a story the whole family can read together under the tree. <!-- Michael: replace the date below once Stefania confirms the last order date --><b>Order by 15 December</b> for delivery in Italy before Christmas, or <b>8 December</b> for delivery abroad.</p>
+<div class="gift-grid">
+<div class="g"><span class="gift-tag">Gift pick</span><img src="the-magic-music-box-book-and-tablet-mockup.webp" alt="The Magic Music Box" loading="lazy" decoding="async"><p>The Magic Music Box</p></div>
+<div class="g"><img src="cover-of-il-carillon-magico.jpg" alt="Il Carillon Magico" loading="lazy" decoding="async"><p>Il Carillon Magico</p></div>
+<div class="g"><img src="cover-of-le-luci-nel-bosco-magico.jpg" alt="Le luci nel bosco magico" loading="lazy" decoding="async"><p>Le luci nel bosco magico</p></div>
+</div>
+</div>
 <div id="products"></div>
 <div class="card" id="ship" style="margin-top:2rem"><h3>Estimate your shipping</h3><p>Shipping is by DHL Express. Every parcel is a DHL box 3, which holds up to 20 books, and the titles can be mixed. Even a single copy travels in one, so a book club, a class or several families ordering together pay much less for each copy.</p><div class="shipgrid"><label>Where are you shipping to?<select id="sz"><option value="it">Italy</option><option value="eu">European Union, outside Italy</option><option value="ne">Europe outside the EU, for example the UK or Norway</option><option value="na">USA or Canada</option><option value="ow">Rest of the world</option></select></label><label>Number of copies<input id="sn" type="number" min="1" step="1" value="10" inputmode="numeric"></label></div><p id="sr" class="price" aria-live="polite"></p><p class="small">This is an estimate. Rates are valid until 31 December 2026 and include VAT where applicable. Questions about shipping? <a href="#contact" data-topic="A question" data-msg="I have a question about shipping.">Ask us</a>.</p></div>
 <div class="card" id="paycard" style="margin-top:2rem"><h3>Ready to pay?</h3><p>Once we have confirmed your total, including shipping, you can pay securely with PayPal.</p><a class="btn" id="paylink" href="#" target="_blank" rel="noopener">Pay with PayPal</a></div>
@@ -274,6 +307,7 @@ footer a{display:inline-block;margin:.2rem .6rem}
 </main>
 <footer><span class="fn">Stefania Bellini</span>Where adventures begin.<br><a href="https://www.facebook.com/people/Stefania-Bellini-Scrittrice/100092835730865/">Facebook</a><a href="https://www.instagram.com/stefania_author/">Instagram</a><a href="https://www.linkedin.com/in/stefania-bellini-639878a9/">LinkedIn</a><a href="https://x.com/stefybelix">X</a><a href="#privacy">Privacy</a><br>© 2026 Stefania Bellini. All rights reserved.</footer>
 <script>
+(function(){var f=document.querySelector('#xmasbar .flakes');if(!f)return;for(var i=0;i<16;i++){var s=document.createElement('span');s.style.left=(Math.random()*100)+'%';s.style.animationDuration=(6+Math.random()*6)+'s';s.style.animationDelay=(Math.random()*6)+'s';s.style.opacity=(.3+Math.random()*.5);f.appendChild(s)}})();
 var CONFIG={email:"bibobakid@gmail.com",paypalMe:"",currency:"EUR",payLink:"https://www.paypal.biz/StefaniaBelliniIT",live:false};
 var PRODUCTS=[
 {n:"The Magic Music Box, signed copy",d:"The English edition, signed by the author, with a personal dedication if you like. Ages 8 to 99.",p:"10.50"},
